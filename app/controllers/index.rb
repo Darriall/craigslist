@@ -9,10 +9,12 @@ get '/create_post' do
 end
 
 post '/created' do
-  @secret_url = (0...50).map{ ('a'..'z').to_a[rand(26)] }.join
+  @secret_url = (0...45).map{ ('a'..'z').to_a[rand(26)] }.join
   params[:secret_url] = @secret_url
   Posts.create(params)
-  erb :created
+  # erb :created
+  content_type :json
+  params.to_json
 end
 
 get '/edit/:secret_url' do
